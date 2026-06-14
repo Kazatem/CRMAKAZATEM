@@ -64,6 +64,8 @@ function App() {
           <Route path="comissoes" element={<SellerCommissionsPage />} />
           <Route path="metas" element={<SellerGoalsPage />} />
           <Route path="inbox" element={<InboxPage />} />
+          </Route>
+
 
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
