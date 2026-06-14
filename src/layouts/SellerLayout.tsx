@@ -8,8 +8,6 @@ const navItems = [
   { to: '/vendedor/comissoes', label: 'Comissões' },
   { to: '/vendedor/metas', label: 'Metas' },
   { to: '/vendedor/inbox', label: 'Inbox' },
-  { to: '/vendedor/inbox', label: 'Inbox' },
-  { to: '/vendedor/inbox', label: 'Inbox' },
 ];
 
 export default function SellerLayout() {

@@ -21,10 +21,6 @@ import SellerGoalsPage from './pages/seller/SellerGoalsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import InboxPage from './pages/InboxPage';
 import AdminInboxPage from './pages/admin/AdminInboxPage';
-import InboxPage from './pages/InboxPage';
-import AdminInboxPage from './pages/admin/AdminInboxPage';
-import InboxPage from './pages/InboxPage';
-import AdminInboxPage from './pages/admin/AdminInboxPage';
 
 function App() {
   return (
@@ -51,8 +47,6 @@ function App() {
           <Route path="metas" element={<AdminGoalsPage />} />
           <Route path="configuracoes" element={<AdminSettingsPage />} />
           <Route path="inbox" element={<AdminInboxPage />} />
-          <Route path="inbox" element={<AdminInboxPage />} />
-          <Route path="inbox" element={<AdminInboxPage />} />
         </Route>
 
         <Route
@@ -70,9 +64,6 @@ function App() {
           <Route path="comissoes" element={<SellerCommissionsPage />} />
           <Route path="metas" element={<SellerGoalsPage />} />
           <Route path="inbox" element={<InboxPage />} />
-          <Route path="inbox" element={<InboxPage />} />
-          <Route path="inbox" element={<InboxPage />} />
-        </Route>
 
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
