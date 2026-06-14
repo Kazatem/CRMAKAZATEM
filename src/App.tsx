@@ -19,6 +19,12 @@ import SellerClientsPage from './pages/seller/SellerClientsPage';
 import SellerCommissionsPage from './pages/seller/SellerCommissionsPage';
 import SellerGoalsPage from './pages/seller/SellerGoalsPage';
 import NotFoundPage from './pages/NotFoundPage';
+import InboxPage from './pages/InboxPage';
+import AdminInboxPage from './pages/admin/AdminInboxPage';
+import InboxPage from './pages/InboxPage';
+import AdminInboxPage from './pages/admin/AdminInboxPage';
+import InboxPage from './pages/InboxPage';
+import AdminInboxPage from './pages/admin/AdminInboxPage';
 
 function App() {
   return (
@@ -44,6 +50,9 @@ function App() {
           <Route path="relatorios" element={<AdminReportsPage />} />
           <Route path="metas" element={<AdminGoalsPage />} />
           <Route path="configuracoes" element={<AdminSettingsPage />} />
+          <Route path="inbox" element={<AdminInboxPage />} />
+          <Route path="inbox" element={<AdminInboxPage />} />
+          <Route path="inbox" element={<AdminInboxPage />} />
         </Route>
 
         <Route
@@ -60,6 +69,9 @@ function App() {
           <Route path="clientes" element={<SellerClientsPage />} />
           <Route path="comissoes" element={<SellerCommissionsPage />} />
           <Route path="metas" element={<SellerGoalsPage />} />
+          <Route path="inbox" element={<InboxPage />} />
+          <Route path="inbox" element={<InboxPage />} />
+          <Route path="inbox" element={<InboxPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/login" replace />} />

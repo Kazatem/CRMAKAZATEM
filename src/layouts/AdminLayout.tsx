@@ -10,6 +10,9 @@ const navItems = [
   { to: '/adm/relatorios', label: 'Relatórios' },
   { to: '/adm/metas', label: 'Metas' },
   { to: '/adm/configuracoes', label: 'Configurações' },
+  { to: '/adm/inbox', label: 'Inbox Vendedores' },
+  { to: '/adm/inbox', label: 'Inbox Vendedores' },
+  { to: '/adm/inbox', label: 'Inbox Vendedores' },
 ];
 
 export default function AdminLayout() {
