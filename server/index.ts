@@ -424,3 +424,67 @@ const port = process.env.PORT || 4001;
 app.listen(port, () => {
   console.log(`CRM backend rodando em http://localhost:${port}`);
 });
+
+// ============ SUPER ADMIN ROUTES ============
+
+app.get('/api/superadmin/empresas', authenticateToken, async (req: AuthRequest, res) => {
+  if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Acesso negado.' });
+  try {
+    const result = await query(`
+      SELECT e.*, u.nome AS vendedor_crm
+      FROM empresas e
+      LEFT JOIN usuarios u ON u.id = e.vendedor_crm_id
+      ORDER BY e.created_at DESC
+    `);
+    return res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Erro ao buscar empresas.' });
+  }
+});
+
+app.post('/api/superadmin/empresas', authenticateToken, async (req: AuthRequest, res) => {
+  if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Acesso negado.' });
+  const { nome, email, telefone, vendedor_crm_id } = req.body;
+  if (!nome || !email) return res.status(400).json({ error: 'Nome e email são obrigatórios.' });
+  try {
+    const result = await query(
+      `INSERT INTO empresas (nome, email, telefone, vendedor_crm_id, status)
+       VALUES ($1, $2, $3, $4, 'ativo')
+       RETURNING *`,
+      [nome, email, telefone, vendedor_crm_id || null]
+    );
+    return res.json(result.rows[0]);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Erro ao criar empresa.' });
+  }
+});
+
+app.put('/api/superadmin/empresas/:id', authenticateToken, async (req: AuthRequest, res) => {
+  if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Acesso negado.' });
+  const { id } = req.params;
+  const { status } = req.body;
+  try {
+    const result = await query(
+      `UPDATE empresas SET status = $1 WHERE id = $2 RETURNING *`,
+      [status, id]
+    );
+    return res.json(result.rows[0]);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Erro ao atualizar empresa.' });
+  }
+});
+
+app.get('/api/superadmin/stats', authenticateToken, async (req: AuthRequest, res) => {
+  if (req.user?.role !== 'admin') return res.status(403).json({ error: 'Acesso negado.' });
+  try {
+    const empresas = await query(`SELECT COUNT(*)::int AS total, COUNT(*) FILTER (WHERE status = 'ativo')::int AS ativas FROM empresas`);
+    const mrr = await query(`SELECT COALESCE(SUM(valor_mensalidade), 0)::numeric(12,2) AS mrr FROM empresas WHERE status = 'ativo'`);
+    return res.json({ ...empresas.rows[0], mrr: mrr.rows[0].mrr });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Erro ao buscar stats.' });
+  }
+});

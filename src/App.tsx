@@ -21,6 +21,7 @@ import SellerGoalsPage from './pages/seller/SellerGoalsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import InboxPage from './pages/InboxPage';
 import AdminInboxPage from './pages/admin/AdminInboxPage';
+import SuperAdminPage from './pages/admin/SuperAdminPage';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="metas" element={<AdminGoalsPage />} />
           <Route path="configuracoes" element={<AdminSettingsPage />} />
           <Route path="inbox" element={<AdminInboxPage />} />
+          <Route path="assinantes" element={<SuperAdminPage />} />
         </Route>
 
         <Route

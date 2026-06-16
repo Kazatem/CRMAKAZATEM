@@ -11,6 +11,7 @@ const navItems = [
   { to: '/adm/metas', label: 'Metas' },
   { to: '/adm/configuracoes', label: 'Configurações' },
   { to: '/adm/inbox', label: 'Inbox Vendedores' },
+  { to: '/adm/assinantes', label: 'Assinantes' },
 ];
 
 export default function AdminLayout() {
